@@ -283,11 +283,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: PartShooter
       objectReference: {fileID: 0}
-    - target: {fileID: 4487936499848361414, guid: 68b040c73eef7f34588ba51db103ff18,
-        type: 3}
-      propertyPath: m_TagString
-      value: Part
-      objectReference: {fileID: 0}
     - target: {fileID: 4487936499848361464, guid: 68b040c73eef7f34588ba51db103ff18,
         type: 3}
       propertyPath: m_RootOrder

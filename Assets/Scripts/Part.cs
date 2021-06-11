@@ -43,7 +43,7 @@ public class Part : MonoBehaviour
         transform.tag = "Part";
 
         //Re-enable the ability to be connected after a delay, otherwise part connects immediately after detaching
-        Invoke("EnableConnect", 1.5f);
+        Invoke("EnableConnect", 0.1f);
     }
 
     private void EnableConnect()
@@ -53,10 +53,10 @@ public class Part : MonoBehaviour
 
     void OnCollisionEnter(Collision collision)
     {
+        m_collidedObject = collision.gameObject;
+
         if (!m_isConnected)
         {
-            m_collidedObject = collision.gameObject;
-
             if (m_collidedObject.CompareTag("Player"))
             {
                 m_isConnected = true;
@@ -65,6 +65,14 @@ public class Part : MonoBehaviour
 
                 m_rigidbody.velocity = Vector3.zero;
                 m_rigidbody.isKinematic = true;
+            }
+        }
+        else
+        {
+            if (m_collidedObject.CompareTag("Enemy"))
+            {
+                Destroy(gameObject);
+                Destroy(m_collidedObject);
             }
         }
     }

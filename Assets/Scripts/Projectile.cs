@@ -5,6 +5,8 @@ public class Projectile : MonoBehaviour
     [SerializeField] private float m_projectileSpeed = 10.0f;
     private Vector3 m_direction = Vector3.zero;
 
+    private GameObject m_collidedObject;
+
     void Start()
     {
         //Destroy itself after 10 seconds
@@ -29,6 +31,12 @@ public class Projectile : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        //Trigger collision against enemies
+        m_collidedObject = other.gameObject;
+
+        if(m_collidedObject.tag == "Enemy")
+        {
+            Destroy(gameObject);
+            Destroy(m_collidedObject);
+        }
     }
 }
