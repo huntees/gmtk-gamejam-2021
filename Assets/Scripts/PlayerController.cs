@@ -27,6 +27,5 @@ public class PlayerController : MonoBehaviour
         m_move = (Input.GetAxisRaw("Vertical") * Vector3.forward + Input.GetAxisRaw("Horizontal") * Vector3.right).normalized;
 
         transform.position += m_move * m_movementSpeed * Time.deltaTime;
-
     }
 }

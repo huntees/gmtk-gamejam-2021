@@ -1,11 +1,11 @@
 ﻿using UnityEngine;
 
-public class Collectible : MonoBehaviour
+public class Part : MonoBehaviour
 {
     private Rigidbody m_rigidbody;
     private GameObject m_collidedObject;
 
-    private bool m_isConnected = false;
+    protected bool m_isConnected = false;
 
     void Awake()
     {
