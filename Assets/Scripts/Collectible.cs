@@ -4,6 +4,8 @@ public class Collectible : MonoBehaviour
 {
     private GameObject collidedObject;
 
+    private bool m_isConnected = false;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -18,11 +20,15 @@ public class Collectible : MonoBehaviour
 
     void OnCollisionEnter(Collision collision)
     {
-        collidedObject = collision.gameObject;
-
-        if (collidedObject.CompareTag("Player"))
+        if (!m_isConnected)
         {
-            transform.parent = collidedObject.transform;
+            collidedObject = collision.gameObject;
+
+            if (collidedObject.CompareTag("Player"))
+            {
+                transform.parent = collidedObject.transform;
+                m_isConnected = true;
+            }
         }
     }
 }
