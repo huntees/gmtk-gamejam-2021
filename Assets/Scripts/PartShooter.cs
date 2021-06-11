@@ -15,12 +15,14 @@ public class PartShooter : Part
     }
 
     // Update is called once per frame
-    void Update()
+    protected override void Update()
     {
-        if(!m_isConnected)
+        if (transform.parent == null)
         {
             return;
         }
+
+        base.Update();
 
         if (Time.time >= m_nextAttackTime)
         {
@@ -36,10 +38,5 @@ public class PartShooter : Part
     {
         m_projectile = Instantiate(m_projectileGameObject, transform.position, transform.rotation).GetComponent<Projectile>();
         m_projectile.SetDirection(GetFireDirection());
-    }
-
-    private Vector3 GetFireDirection()
-    {
-        return (transform.position - transform.parent.position).normalized;
     }
 }

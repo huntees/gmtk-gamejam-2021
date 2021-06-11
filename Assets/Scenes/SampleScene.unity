@@ -133,6 +133,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: PartShooter (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 4487936499848361414, guid: 68b040c73eef7f34588ba51db103ff18,
+        type: 3}
+      propertyPath: m_TagString
+      value: Part
+      objectReference: {fileID: 0}
     - target: {fileID: 4487936499848361464, guid: 68b040c73eef7f34588ba51db103ff18,
         type: 3}
       propertyPath: m_RootOrder
@@ -277,6 +282,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: PartShooter
+      objectReference: {fileID: 0}
+    - target: {fileID: 4487936499848361414, guid: 68b040c73eef7f34588ba51db103ff18,
+        type: 3}
+      propertyPath: m_TagString
+      value: Part
       objectReference: {fileID: 0}
     - target: {fileID: 4487936499848361464, guid: 68b040c73eef7f34588ba51db103ff18,
         type: 3}
@@ -443,7 +453,7 @@ GameObject:
   - component: {fileID: 852649409}
   m_Layer: 0
   m_Name: Collectible
-  m_TagString: Player
+  m_TagString: Part
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -566,7 +576,7 @@ GameObject:
   - component: {fileID: 892481383}
   m_Layer: 0
   m_Name: Collectible (3)
-  m_TagString: Player
+  m_TagString: Part
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -788,7 +798,7 @@ GameObject:
   - component: {fileID: 1010998230}
   m_Layer: 0
   m_Name: Collectible (1)
-  m_TagString: Player
+  m_TagString: Part
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -911,7 +921,7 @@ GameObject:
   - component: {fileID: 1706495958}
   m_Layer: 0
   m_Name: Collectible (4)
-  m_TagString: Player
+  m_TagString: Part
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1030,6 +1040,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: PartShooter (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 4487936499848361414, guid: 68b040c73eef7f34588ba51db103ff18,
+        type: 3}
+      propertyPath: m_TagString
+      value: Part
+      objectReference: {fileID: 0}
     - target: {fileID: 4487936499848361464, guid: 68b040c73eef7f34588ba51db103ff18,
         type: 3}
       propertyPath: m_RootOrder
@@ -1103,7 +1118,7 @@ GameObject:
   - component: {fileID: 1779327645}
   m_Layer: 0
   m_Name: Collectible (5)
-  m_TagString: Player
+  m_TagString: Part
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1317,6 +1332,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dd7f2859057fa444aad8c5e07c437c70, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_movementSpeed: 5
+  m_health: 100
 --- !u!54 &1830327571
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1349,7 +1366,7 @@ GameObject:
   - component: {fileID: 1888652709}
   m_Layer: 0
   m_Name: Collectible (2)
-  m_TagString: Player
+  m_TagString: Part
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

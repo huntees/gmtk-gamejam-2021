@@ -2,16 +2,18 @@
 
 public class PlayerController : MonoBehaviour
 {
+    [SerializeField] private float m_movementSpeed = 5.0f;
+    [SerializeField] private int m_health = 100;
+    private int m_currentHealth = 100;
 
     private Vector3 m_move;
-    private float m_movementSpeed = 5.0f;
-    private int lifePoints = 100;
 
 
     // Start is called before the first frame update
     void Start()
     {
-
+        Application.targetFrameRate = 145;
+        m_currentHealth = m_health;
     }
 
     // Update is called once per frame
