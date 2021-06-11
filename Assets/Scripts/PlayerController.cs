@@ -33,10 +33,10 @@ public class PlayerController : MonoBehaviour
         transform.position += m_move * m_movementSpeed * Time.deltaTime;
     }
 
-    void GetDamaged(int numDamage)
+    void TakeDamage(int numDamage)
     {
-        lifePoints -= numDamage;
-        if (lifePoints <= 0) { Die(); }
+        m_currentHealth -= numDamage;
+        if (m_currentHealth <= 0) { Die(); }
     }
 
     void Die()
@@ -52,7 +52,7 @@ public class PlayerController : MonoBehaviour
         if (collider.CompareTag("Enemy"))
         {
             int damageToSet = collider.GetComponent<Kamikaze>().GetDamagePoints();
-            GetDamaged(damageToSet);
+            TakeDamage(damageToSet);
             Object.Destroy(collider);
 
         }

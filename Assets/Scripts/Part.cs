@@ -36,14 +36,14 @@ public class Part : MonoBehaviour
     {
         //turn physics on again and fire part away from player
         m_rigidbody.isKinematic = false;
-        m_rigidbody.AddForce(GetFireDirection() * 5.0f, ForceMode.Impulse);
+        m_rigidbody.AddForce(GetFireDirection() * 2.0f, ForceMode.Impulse);
 
         //remove parent from part
         transform.parent = null;
         transform.tag = "Part";
 
         //Re-enable the ability to be connected after a delay, otherwise part connects immediately after detaching
-        Invoke("EnableConnect", 3.0f);
+        Invoke("EnableConnect", 1.5f);
     }
 
     private void EnableConnect()
