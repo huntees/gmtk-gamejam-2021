@@ -2,9 +2,15 @@
 
 public class Collectible : MonoBehaviour
 {
-    private GameObject collidedObject;
+    private Rigidbody m_rigidbody;
+    private GameObject m_collidedObject;
 
     private bool m_isConnected = false;
+
+    void Awake()
+    {
+        m_rigidbody = GetComponent<Rigidbody>();
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -22,12 +28,14 @@ public class Collectible : MonoBehaviour
     {
         if (!m_isConnected)
         {
-            collidedObject = collision.gameObject;
+            m_collidedObject = collision.gameObject;
 
-            if (collidedObject.CompareTag("Player"))
+            if (m_collidedObject.CompareTag("Player"))
             {
-                transform.parent = collidedObject.transform;
+                transform.parent = m_collidedObject.transform;
                 m_isConnected = true;
+                m_rigidbody.velocity = Vector3.zero;
+                m_rigidbody.isKinematic = true;
             }
         }
     }
