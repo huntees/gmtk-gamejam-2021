@@ -8,6 +8,8 @@ public class PlayerController : MonoBehaviour
     private int lifePoints = 100;
 
 
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -28,4 +30,31 @@ public class PlayerController : MonoBehaviour
 
         transform.position += m_move * m_movementSpeed * Time.deltaTime;
     }
+
+    void GetDamaged(int numDamage)
+    {
+        lifePoints -= numDamage;
+        if (lifePoints <= 0) { Die(); }
+    }
+
+    void Die()
+    {
+        Debug.Log("You died!");
+    }
+
+
+    void OnCollisionEnter(Collision collision)
+    {
+        var collider = collision.gameObject;
+
+        if (collider.CompareTag("Enemy"))
+        {
+            int damageToSet = collider.GetComponent<Kamikaze>().GetDamagePoints();
+            GetDamaged(damageToSet);
+            Object.Destroy(collider);
+
+        }
+    }
+
+
 }
