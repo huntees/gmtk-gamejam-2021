@@ -10,7 +10,6 @@ public class PlayerController : MonoBehaviour
 
 
 
-
     // Start is called before the first frame update
     void Start()
     {
@@ -38,7 +37,8 @@ public class PlayerController : MonoBehaviour
     void TakeDamage(int numDamage)
     {
         m_currentHealth -= numDamage;
-        if (m_currentHealth <= 0) { Die(); }
+        m_health -= numDamage;
+        if (m_health <= 0) { Die(); }
     }
 
     void Die()
@@ -53,6 +53,7 @@ public class PlayerController : MonoBehaviour
 
         if (collider.CompareTag("Enemy"))
         {
+            Debug.Log("contact with an ennemy");
             int damageToSet = collider.GetComponent<Kamikaze>().GetDamagePoints();
             TakeDamage(damageToSet);
             Object.Destroy(collider);
