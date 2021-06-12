@@ -2,8 +2,9 @@
 
 public class Part : MonoBehaviour
 {
+    protected PlayerController m_playerController;
     private Rigidbody m_rigidbody;
-    private GameObject m_collidedObject;
+    protected GameObject m_collidedObject;
 
     protected bool m_isConnected = false;
 
@@ -18,18 +19,29 @@ public class Part : MonoBehaviour
 
     }
 
+    // protected virtual string GetKind()
+    // {
+    //     return "base";
+    // }
+
     // Update is called once per frame
     protected virtual void Update()
     {
-        if(transform.parent == null)
+        if (transform.parent == null)
         {
             return;
         }
 
-        if(Input.GetKeyDown(KeyCode.E))
+        if (Input.GetKeyDown(KeyCode.E))
         {
             Eject();
         }
+    }
+
+    private void FixedUpdate()
+    {
+        transform.position = new Vector3(transform.position.x, 2.3f, transform.position.z);
+        transform.rotation = Quaternion.Euler(-90.0f, transform.eulerAngles.y, transform.eulerAngles.z);
     }
 
     private void Eject()
@@ -43,7 +55,9 @@ public class Part : MonoBehaviour
         transform.tag = "Part";
 
         //Re-enable the ability to be connected after a delay, otherwise part connects immediately after detaching
-        Invoke("EnableConnect", 0.1f);
+        Invoke("EnableConnect", 0.2f);
+
+        m_playerController?.UpdateMovementSpeed();
     }
 
     private void EnableConnect()
@@ -61,7 +75,7 @@ public class Part : MonoBehaviour
         }
     }
 
-    void OnCollisionEnter(Collision collision)
+    protected virtual void OnCollisionEnter(Collision collision)
     {
         m_collidedObject = collision.gameObject;
 
@@ -75,6 +89,9 @@ public class Part : MonoBehaviour
 
                 m_rigidbody.velocity = Vector3.zero;
                 m_rigidbody.isKinematic = true;
+
+                m_playerController = transform.root.GetComponent<PlayerController>();
+                m_playerController?.UpdateMovementSpeed();
             }
         }
         else
@@ -88,6 +105,8 @@ public class Part : MonoBehaviour
 
                 Destroy(gameObject);
                 Destroy(m_collidedObject);
+
+                m_playerController?.UpdateMovementSpeed();
             }
         }
     }

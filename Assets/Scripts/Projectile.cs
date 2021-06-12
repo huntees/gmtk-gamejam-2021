@@ -8,10 +8,10 @@ public class Projectile : MonoBehaviour
 
     private GameObject m_collidedObject;
 
-    void Start()
+    void OnEnable()
     {
         //Destroy itself after 10 seconds
-        Invoke("SelfDestruct", 10.0f);
+        Invoke("DisableObject", 7.0f);
     }
 
     // Update is called once per frame
@@ -20,9 +20,10 @@ public class Projectile : MonoBehaviour
         transform.position += m_direction * m_projectileSpeed * Time.deltaTime;
     }
 
-    private void SelfDestruct()
+    private void DisableObject()
     {
-        Destroy(gameObject);
+        CancelInvoke();
+        gameObject.SetActive(false);
     }
 
     public void SetDirection(Vector3 shootDirection)
@@ -36,7 +37,7 @@ public class Projectile : MonoBehaviour
 
         if (m_collidedObject.tag == "Enemy")
         {
-            Destroy(gameObject);
+            DisableObject();
             Destroy(m_collidedObject);
         }
     }

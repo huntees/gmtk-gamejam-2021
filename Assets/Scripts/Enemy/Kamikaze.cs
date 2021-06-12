@@ -12,25 +12,23 @@ public class Kamikaze : Enemy
 
     public GameObject target;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-
-    }
+    Vector3 heading;
 
     void Awake()
     {
         b_rigidbody = GetComponent<Rigidbody>();
     }
 
-    // Update is called once per frame
-    void Update()
-    { }
+    // Start is called before the first frame update
+    void Start()
+    {
+        target = GameObject.Find("Player");
+    }
 
     void FixedUpdate()
     {
 
-        var heading = target.transform.position - transform.position;
+        heading = target.transform.position - transform.position;
         //Movement 
         b_move = (heading).normalized;
         transform.position += b_move * b_movementSpeed * Time.deltaTime;

@@ -648,6 +648,7 @@ PlayerSettings:
       daydreamIconForeground: {fileID: 0}
       daydreamIconBackground: {fileID: 0}
   cloudServicesEnabled:
+    Collab: 1
     UNet: 1
   luminIcon:
     m_Name: 
@@ -661,10 +662,10 @@ PlayerSettings:
     m_VersionCode: 1
     m_VersionName: 
   apiCompatibilityLevel: 6
-  cloudProjectId: 
+  cloudProjectId: 601d7d62-09d3-4e7b-88bc-d6764c809587
   framebufferDepthMemorylessMode: 0
-  projectName: 
-  organizationId: 
+  projectName: gmtk-gamejam-2021
+  organizationId: gmtk_ox_2021
   cloudEnabled: 0
   enableNativePlatformBackendsForNewInputSystem: 0
   disableOldInputManagerSupport: 0
