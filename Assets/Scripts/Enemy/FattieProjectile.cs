@@ -11,11 +11,12 @@ public class FattieProjectile : Enemy
     private Vector3 f_direction = Vector3.zero;
     protected static new int damagePoints = 20;
 
+    private GameObject m_collidedObject;
 
     // Start is called before the first frame update
     void Start()
     {
-        Invoke("SelfDestruct", 10.0f);
+        Invoke("SelfDestruct", 7.0f);
     }
 
     // Update is called once per frame
@@ -44,6 +45,27 @@ public class FattieProjectile : Enemy
     private void SelfDestruct()
     {
         Destroy(gameObject);
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        m_collidedObject = other.gameObject;
+
+        if (m_collidedObject.tag == "Player") {
+
+            var playerController = m_collidedObject.GetComponent<PlayerController>();
+
+            if(playerController != null)
+            {
+                playerController.TakeDamage(GetDamagePoints());
+            } 
+            else
+            {
+                Destroy(other.gameObject);
+            }
+
+            Destroy(gameObject);
+        }
     }
 
 }

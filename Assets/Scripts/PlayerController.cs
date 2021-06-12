@@ -40,7 +40,7 @@ public class PlayerController : MonoBehaviour
         transform.position += m_move * m_currentMovementSpeed * Time.deltaTime;
     }
 
-    void TakeDamage(int numDamage)
+    public void TakeDamage(int numDamage)
     {
         m_currentHealth -= numDamage;
         m_health -= numDamage;
