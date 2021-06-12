@@ -10,6 +10,7 @@ public class Fattie : Enemy
 
     [SerializeField] private float f_attackTime = 1.0f;
     private float f_nextAttackTime = 5.0f;
+    protected static new int damagePoints = 20;
 
 
     // Start is called before the first frame update
@@ -18,6 +19,8 @@ public class Fattie : Enemy
     // Update is called once per frame
     void Update()
     {
+        // How does the Fattie move?
+
         if (Time.time >= f_nextAttackTime)
         {
             Shoot();
@@ -33,5 +36,11 @@ public class Fattie : Enemy
         f_projectile.SetDirection(f_projectile.GetFireDirection(transform));
 
     }
+
+    public override int GetDamagePoints()
+    {
+        return damagePoints;
+    }
+
 
 }

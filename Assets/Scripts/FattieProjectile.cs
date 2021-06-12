@@ -9,6 +9,7 @@ public class FattieProjectile : Enemy
     [SerializeField] private int f_health = 50;
     private Vector3 f_move;
     private Vector3 f_direction = Vector3.zero;
+    protected static new int damagePoints = 20;
 
 
     // Start is called before the first frame update
@@ -33,5 +34,11 @@ public class FattieProjectile : Enemy
     {
         return (transform.position - shooterTransform.position).normalized;
     }
+
+    public override int GetDamagePoints()
+    {
+        return damagePoints;
+    }
+
 
 }
