@@ -51,6 +51,7 @@ public class PlayerController : MonoBehaviour
     {
         var collider = collision.gameObject;
 
+        // todo update: all enemies should inherit an Enemy class (including projectiles should have a GetDamagePoints function)
         if (collider.CompareTag("Enemy"))
         {
             Debug.Log("contact with an ennemy");

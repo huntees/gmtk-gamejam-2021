@@ -5,9 +5,10 @@ using UnityEngine;
 public class FattieProjectile : MonoBehaviour
 {
 
-    [SerializeField] private float f_movementSpeed = 2.0f;
+    [SerializeField] private float f_movementSpeed = 5.0f;
     [SerializeField] private int f_health = 50;
     private Vector3 f_move;
+    private Vector3 f_direction = Vector3.zero;
 
 
     // Start is called before the first frame update
@@ -19,13 +20,18 @@ public class FattieProjectile : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        transform.position += f_direction * f_movementSpeed * Time.deltaTime;
+    }
 
+    public void SetDirection(Vector3 shootDirection)
+    {
+        f_direction = shootDirection;
     }
 
 
-    protected Vector3 GetFireDirection()
+    public Vector3 GetFireDirection(UnityEngine.Transform shooterTransform)
     {
-        return (transform.position - transform.parent.position).normalized;
+        return (transform.position - shooterTransform.position).normalized;
     }
 
 }
