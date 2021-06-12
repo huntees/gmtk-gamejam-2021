@@ -11,6 +11,8 @@ public class Fattie : Enemy
     [SerializeField] private float f_attackTime = 1.0f;
     private float f_nextAttackTime = 5.0f;
     protected static new int damagePoints = 20;
+    public GameObject target;
+
 
 
     // Start is called before the first frame update
@@ -19,7 +21,8 @@ public class Fattie : Enemy
     // Update is called once per frame
     void Update()
     {
-        // How does the Fattie move?
+        // How does the Fattie move?... Get to a certain distance to the player and then rotate around
+
 
         if (Time.time >= f_nextAttackTime)
         {

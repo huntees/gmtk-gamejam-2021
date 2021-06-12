@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 
-public class Projectile : Enemy
+
+public class Projectile : MonoBehaviour
 {
     [SerializeField] private float m_projectileSpeed = 10.0f;
     private Vector3 m_direction = Vector3.zero;

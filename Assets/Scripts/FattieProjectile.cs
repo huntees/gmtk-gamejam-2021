@@ -15,7 +15,7 @@ public class FattieProjectile : Enemy
     // Start is called before the first frame update
     void Start()
     {
-
+        Invoke("SelfDestruct", 10.0f);
     }
 
     // Update is called once per frame
@@ -40,5 +40,10 @@ public class FattieProjectile : Enemy
         return damagePoints;
     }
 
+    // How long until we destroy it? 10s for now.
+    private void SelfDestruct()
+    {
+        Destroy(gameObject);
+    }
 
 }
