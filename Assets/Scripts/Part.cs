@@ -51,6 +51,16 @@ public class Part : MonoBehaviour
         m_isConnected = false;
     }
 
+    private void EjectOnHit()
+    {
+        Eject();
+
+        foreach (Transform child in transform)
+        {
+            child.transform.GetComponent<Part>().EjectOnHit();
+        }
+    }
+
     void OnCollisionEnter(Collision collision)
     {
         m_collidedObject = collision.gameObject;
@@ -71,6 +81,11 @@ public class Part : MonoBehaviour
         {
             if (m_collidedObject.CompareTag("Enemy"))
             {
+                foreach (Transform child in transform)
+                {
+                    child.transform.GetComponent<Part>().EjectOnHit();
+                }
+
                 Destroy(gameObject);
                 Destroy(m_collidedObject);
             }
