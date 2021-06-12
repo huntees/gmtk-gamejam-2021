@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Fattie : MonoBehaviour
+public class Fattie : Enemy
 {
 
     private FattieProjectile f_projectile;

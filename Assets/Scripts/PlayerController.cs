@@ -55,7 +55,8 @@ public class PlayerController : MonoBehaviour
         if (collider.CompareTag("Enemy"))
         {
             Debug.Log("contact with an ennemy");
-            int damageToSet = collider.GetComponent<Kamikaze>().GetDamagePoints();
+            int damageToSet = collider.GetComponent<Enemy>().GetDamagePoints();
+            Debug.Log("damageToSet: " + damageToSet);
             TakeDamage(damageToSet);
             Object.Destroy(collider);
 

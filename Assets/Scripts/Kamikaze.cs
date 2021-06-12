@@ -2,12 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Kamikaze : MonoBehaviour
+public class Kamikaze : Enemy
 {
 
     private Vector3 b_move;
     private float b_movementSpeed = 2.5f;
-    private int damagePoints = 25;
+    protected static new int damagePoints = 30;
     private Rigidbody b_rigidbody;
 
     public GameObject target;
@@ -37,9 +37,11 @@ public class Kamikaze : MonoBehaviour
 
     }
 
-    public int GetDamagePoints()
+
+    public override int GetDamagePoints()
     {
         return damagePoints;
     }
+
 
 }

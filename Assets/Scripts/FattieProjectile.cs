@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FattieProjectile : MonoBehaviour
+public class FattieProjectile : Enemy
 {
 
     [SerializeField] private float f_movementSpeed = 5.0f;

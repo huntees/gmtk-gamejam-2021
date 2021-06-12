@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class Projectile : MonoBehaviour
+public class Projectile : Enemy
 {
     [SerializeField] private float m_projectileSpeed = 10.0f;
     private Vector3 m_direction = Vector3.zero;
@@ -33,7 +33,7 @@ public class Projectile : MonoBehaviour
     {
         m_collidedObject = other.gameObject;
 
-        if(m_collidedObject.tag == "Enemy")
+        if (m_collidedObject.tag == "Enemy")
         {
             Destroy(gameObject);
             Destroy(m_collidedObject);
