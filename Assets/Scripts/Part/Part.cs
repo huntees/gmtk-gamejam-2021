@@ -104,7 +104,7 @@ public class Part : MonoBehaviour
                 }
 
                 Destroy(gameObject);
-                Destroy(m_collidedObject);
+                m_collidedObject.gameObject.GetComponent<Enemy>().Die();
 
                 m_playerController?.UpdateMovementSpeed();
             }

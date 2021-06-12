@@ -13,6 +13,11 @@ public class Enemy : MonoBehaviour
 
     }
 
+    private void FixedUpdate()
+    {
+        transform.position = new Vector3(transform.position.x, 2.3f, transform.position.z);
+    }
+
     // Update is called once per frame
     void Update()
     {
@@ -24,5 +29,9 @@ public class Enemy : MonoBehaviour
         return damagePoints;
     }
 
-
+    public void Die()
+    {
+        GameObject.Find("SpawnManager").GetComponent<SpawnManager>().DecreaseEnemyCount();
+        Destroy(gameObject);
+    }
 }

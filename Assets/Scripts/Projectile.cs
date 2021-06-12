@@ -38,7 +38,7 @@ public class Projectile : MonoBehaviour
         if (m_collidedObject.tag == "Enemy")
         {
             DisableObject();
-            Destroy(m_collidedObject);
+            m_collidedObject.gameObject.GetComponent<Enemy>().Die();
         }
     }
 }

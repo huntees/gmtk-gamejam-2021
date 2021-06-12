@@ -18,16 +18,24 @@ public class SpawnManager : MonoBehaviour
     [SerializeField] private float m_minSpawnTime = 4f;
     private float m_randomSpawnTime = 4f;
 
+    private int m_enemiesLeft = 0;
+    private bool m_isSpawning = false;
+
+    private int waveCount = 0;
+
     // Start is called before the first frame update
     void Start()
     {
-        InitiateEnemySpawn(3, 1);
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        if(!m_isSpawning && m_enemiesLeft <= 0)
+        {
+            waveCount++;
+            InitiateEnemySpawn(2 * waveCount, 1 * waveCount);
+        }
     }
 
     public void InitiateEnemySpawn(int numOfEnemies, int enemiesPerSpawn)
@@ -37,6 +45,7 @@ public class SpawnManager : MonoBehaviour
 
     IEnumerator SpawnEnemies(int numOfEnemies, int enemiesPerSpawn)
     {
+        m_isSpawning = true;
         int enemiesSpawned = 0;
 
         while (enemiesSpawned < numOfEnemies)
@@ -58,6 +67,7 @@ public class SpawnManager : MonoBehaviour
                 m_instantiatedEnemy.SetActive(true);
 
                 enemiesSpawned++;
+                m_enemiesLeft++;
 
                 //break if enemies spawned exceeds limit
                 if (enemiesSpawned >= numOfEnemies)
@@ -66,5 +76,12 @@ public class SpawnManager : MonoBehaviour
                 }
             }
         }
+
+        m_isSpawning = false;
+    }
+
+    public void DecreaseEnemyCount()
+    {
+        m_enemiesLeft--;
     }
 }
