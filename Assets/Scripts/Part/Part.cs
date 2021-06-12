@@ -46,6 +46,11 @@ public class Part : MonoBehaviour
 
     private void Eject()
     {
+        if(!m_isConnected)
+        {
+            return ;
+        }
+
         //turn physics on again and fire part away from player
         m_rigidbody.isKinematic = false;
         m_rigidbody.AddForce(GetFireDirection() * 2.0f, ForceMode.Impulse);

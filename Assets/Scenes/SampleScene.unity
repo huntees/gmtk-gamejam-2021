@@ -1320,36 +1320,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Fattie
       objectReference: {fileID: 0}
-    - target: {fileID: 5165036295707513673, guid: 94ffd26e5b23f9248a1c30ddea57c27b,
-        type: 3}
-      propertyPath: m_Size.x
-      value: 0.054725215
-      objectReference: {fileID: 0}
-    - target: {fileID: 5165036295707513673, guid: 94ffd26e5b23f9248a1c30ddea57c27b,
-        type: 3}
-      propertyPath: m_Size.y
-      value: 0.04188606
-      objectReference: {fileID: 0}
-    - target: {fileID: 5165036295707513673, guid: 94ffd26e5b23f9248a1c30ddea57c27b,
-        type: 3}
-      propertyPath: m_Size.z
-      value: 0.023887258
-      objectReference: {fileID: 0}
-    - target: {fileID: 5165036295707513673, guid: 94ffd26e5b23f9248a1c30ddea57c27b,
-        type: 3}
-      propertyPath: m_Center.x
-      value: 0.0025220523
-      objectReference: {fileID: 0}
-    - target: {fileID: 5165036295707513673, guid: 94ffd26e5b23f9248a1c30ddea57c27b,
-        type: 3}
-      propertyPath: m_Center.y
-      value: -9.313226e-10
-      objectReference: {fileID: 0}
-    - target: {fileID: 5165036295707513673, guid: 94ffd26e5b23f9248a1c30ddea57c27b,
-        type: 3}
-      propertyPath: m_Center.z
-      value: 0.0013443669
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 94ffd26e5b23f9248a1c30ddea57c27b, type: 3}
 --- !u!4 &1830327569 stripped

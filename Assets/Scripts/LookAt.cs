@@ -4,13 +4,11 @@ using UnityEngine;
 
 public class LookAt : MonoBehaviour
 {
-    private GameObject player;
-    public Transform target; // The object to look at
+    private Transform target;
 
     private void Start()
     {
-        player = GameObject.FindWithTag("Player");
-        target = player.transform;
+        target = GameObject.FindWithTag("Player").transform;
     }
 
     void Update()
