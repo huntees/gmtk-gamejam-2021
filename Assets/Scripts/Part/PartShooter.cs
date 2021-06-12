@@ -60,4 +60,17 @@ public class PartShooter : Part
             Debug.Log("No ammo!");
         }
     }
+
+    protected override void OnCollisionEnter(Collision collision)
+    {
+        if (!m_isConnected)
+        {
+            base.OnCollisionEnter(collision);
+
+            if (m_collidedObject.CompareTag("Player"))
+            {
+                transform.rotation = Quaternion.LookRotation((transform.position - transform.parent.position).normalized);
+            }
+        }
+    }
 }
