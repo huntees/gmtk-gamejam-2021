@@ -30,12 +30,6 @@ public class FattieProjectile : Enemy
         f_direction = shootDirection;
     }
 
-
-    public Vector3 GetFireDirection(UnityEngine.Transform shooterTransform)
-    {
-        return (transform.position - shooterTransform.position).normalized;
-    }
-
     public override int GetDamagePoints()
     {
         return damagePoints;
@@ -59,7 +53,7 @@ public class FattieProjectile : Enemy
             {
                 playerController.TakeDamage(GetDamagePoints());
             } 
-            else
+            else if(m_collidedObject.GetComponent<Part>() != null)
             {
                 Destroy(other.gameObject);
             }
@@ -68,4 +62,8 @@ public class FattieProjectile : Enemy
         }
     }
 
+    public override void Die()
+    {
+        Destroy(gameObject);
+    }
 }

@@ -34,7 +34,7 @@ public class Fattie : Enemy
     {
 
         f_projectile = Instantiate(f_projectileGameObject, m_barrel.transform.position, m_barrel.transform.rotation).GetComponent<FattieProjectile>();
-        f_projectile.SetDirection(f_projectile.GetFireDirection(transform));
+        f_projectile.SetDirection(m_barrel.transform.forward);
 
     }
 

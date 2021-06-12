@@ -29,9 +29,9 @@ public class Enemy : MonoBehaviour
         return damagePoints;
     }
 
-    public void Die()
+    public virtual void Die()
     {
-        GameObject.Find("SpawnManager").GetComponent<SpawnManager>().DecreaseEnemyCount();
+        GameObject.Find("SpawnManager")?.GetComponent<SpawnManager>().DecreaseEnemyCount();
         Destroy(gameObject);
     }
 }
