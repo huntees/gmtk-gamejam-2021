@@ -2,7 +2,7 @@
 
 public class PlayerController : MonoBehaviour
 {
-    [SerializeField] private float m_movementSpeed = 5.0f;
+    [SerializeField] private float m_movementSpeed = 12.0f;
     [SerializeField] private int m_health = 100;
     private int m_currentHealth = 100;
 
@@ -27,9 +27,11 @@ public class PlayerController : MonoBehaviour
     void FixedUpdate()
     {
 
+        // Speed variations: dependent of number of children. Should never reach 0, but can get ridiculously low. (to adapt based on types of children, but maybe not this section of the code)
+        m_movementSpeed = 1.0f + (11.0f / Mathf.Sqrt(transform.hierarchyCount));
+
         //Movement 
         m_move = (Input.GetAxisRaw("Vertical") * Vector3.forward + Input.GetAxisRaw("Horizontal") * Vector3.right).normalized;
-
         transform.position += m_move * m_movementSpeed * Time.deltaTime;
     }
 
