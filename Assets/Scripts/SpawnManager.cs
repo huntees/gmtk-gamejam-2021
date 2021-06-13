@@ -34,7 +34,8 @@ public class SpawnManager : MonoBehaviour
 
 
     private int m_enemiesLeft = 0;
-    private bool m_isSpawning = false;
+    private bool m_isSpawningEnemies = false;
+    private bool m_isSpawningParts = false;
 
     private int waveCount = 0;
 
@@ -65,10 +66,14 @@ public class SpawnManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!m_isSpawning && m_enemiesLeft <= 0)
+        if (!m_isSpawningEnemies && m_enemiesLeft <= 0)
         {
             waveCount++;
             InitiateEnemySpawn(2 * waveCount, 1 * waveCount);
+        }
+        if (!m_isSpawningParts)
+        {
+            InitiatePartSpawn(2 * waveCount, 1 * waveCount);
         }
     }
 
@@ -85,7 +90,7 @@ public class SpawnManager : MonoBehaviour
 
     IEnumerator SpawnEnemies(int numOfEnemies, int enemiesPerSpawn)
     {
-        m_isSpawning = true;
+        m_isSpawningEnemies = true;
         int enemiesSpawned = 0;
 
         while (enemiesSpawned < numOfEnemies)
@@ -105,20 +110,13 @@ public class SpawnManager : MonoBehaviour
                 // m_instantiatedEnemy.transform.position = m_spawnLocations[m_randomLocationIndex].position;
 
                 // Dirty, but this is a game jam
+                // This doesn't work and I'm not sure I get why. Anyway, we need some verification of the position not overlapping with an existing object, otherwise we get in a softlock
+                // float randomizerEdgeVal = Random.Range(0.0f, baseVecPair.magnitude);
                 int randSpawnEdgeIndx = Random.Range(0, 4);
                 var selecPair = (randSpawnEdgeIndx == 0) ? pair1 : (randSpawnEdgeIndx == 1) ? pair2 : (randSpawnEdgeIndx == 2) ? pair3 : pair4;
                 var baseVecPair = (selecPair.transform2.position - selecPair.transform1.position).normalized;
                 int randomizerEdgeVal = Random.Range(0, 100);
                 var posEnemy = selecPair.transform1.position + baseVecPair * randomizerEdgeVal;
-
-                // float dirRandX = Random.Range(0.0f, 100.0f); float dirRandZ = Random.Range(0.0f, 100.0f);
-                // if (dirRandX < 50.0f) { dirRandX = -1.0f; } else { dirRandX = 1.0f; }
-                // if (dirRandZ < 50.0f) { dirRandZ = -1.0f; } else { dirRandZ = 1.0f; }
-                // Debug.Log("dirRandX: " + dirRandX + ", dirRandZ: " + dirRandZ);
-                // float posX = 28.0f * dirRandX + Random.Range(0, 5) * dirRandX;
-                // float posZ = 25.0f * dirRandZ + Random.Range(0, 5) * dirRandZ;
-                // Vector3 posEnemy = new Vector3(posX, 2.3f, posZ);
-                // if (isObjectHere(posEnemy)) {  } else { }
 
                 m_instantiatedEnemy.transform.position = posEnemy;
 
@@ -135,7 +133,7 @@ public class SpawnManager : MonoBehaviour
             }
         }
 
-        m_isSpawning = false;
+        m_isSpawningEnemies = false;
     }
 
     public void DecreaseEnemyCount()
@@ -158,7 +156,7 @@ public class SpawnManager : MonoBehaviour
 
     IEnumerator SpawnParts(int numOfParts, int partsPerSpawn)
     {
-        m_isSpawning = true;
+        m_isSpawningParts = true;
         int partsSpawned = 0;
 
         while (partsSpawned < numOfParts)
@@ -184,15 +182,6 @@ public class SpawnManager : MonoBehaviour
                 int randomizerEdgeVal = Random.Range(0, 100);
                 var posPart = selecPair.transform1.position + baseVecPair * randomizerEdgeVal;
 
-                // float dirRandX = Random.Range(0.0f, 100.0f); float dirRandZ = Random.Range(0.0f, 100.0f);
-                // if (dirRandX < 50.0f) { dirRandX = -1.0f; } else { dirRandX = 1.0f; }
-                // if (dirRandZ < 50.0f) { dirRandZ = -1.0f; } else { dirRandZ = 1.0f; }
-                // Debug.Log("dirRandX: " + dirRandX + ", dirRandZ: " + dirRandZ);
-                // float posX = 28.0f * dirRandX + Random.Range(0, 5) * dirRandX;
-                // float posZ = 25.0f * dirRandZ + Random.Range(0, 5) * dirRandZ;
-                // Vector3 posEnemy = new Vector3(posX, 2.3f, posZ);
-                // if (isObjectHere(posEnemy)) {  } else { }
-
                 m_instantiatedPart.transform.position = posPart;
                 m_instantiatedPart.SetActive(true);
 
@@ -206,7 +195,7 @@ public class SpawnManager : MonoBehaviour
             }
         }
 
-        m_isSpawning = false;
+        m_isSpawningParts = false;
     }
 
 
