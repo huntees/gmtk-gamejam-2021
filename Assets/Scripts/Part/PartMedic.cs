@@ -2,16 +2,16 @@
 
 public class PartMedic : Part
 {
-    private int medicStock = 1;
+    private bool m_collected = false;
 
     protected override void OnCollisionEnter(Collision collision)
     {
         base.OnCollisionEnter(collision);
 
-        if (m_collidedObject.CompareTag("Player"))
+        if (!m_collected && m_collidedObject.CompareTag("Player"))
         {
             m_playerController.RestoreHealth();
-            medicStock = 0;
+            m_collected = true;
         }
     }
 
@@ -24,7 +24,5 @@ public class PartMedic : Part
         }
         base.Update();
     }
-
-    public int GetMedicStock() { return medicStock; }
 
 }
