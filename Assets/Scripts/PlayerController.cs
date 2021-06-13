@@ -13,6 +13,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float m_turnRate = 100.0f;
 
     public event Action<int> HUD_updateAmmo;
+    public event Action HUD_restoreLife;
+    public event Action HUD_removeLife;
 
     private Vector3 m_move;
 
@@ -37,8 +39,18 @@ public class PlayerController : MonoBehaviour
     public void TakeDamage(int numDamage)
     {
         m_currentHealth--;
+        HUD_removeLife?.Invoke();
 
         if (m_currentHealth <= 0) { Die(); }
+    }
+
+    public void RestoreHealth()
+    {
+        if(m_currentHealth < 3)
+        {
+            m_currentHealth++;
+            HUD_restoreLife?.Invoke();
+        }
     }
 
     void Die()

@@ -19,6 +19,8 @@ public class HudManager : MonoBehaviour
         m_spawnManager = GameObject.Find("SpawnManager").GetComponent<SpawnManager>();
 
         m_playerController.HUD_updateAmmo += UpdateAmmoText;
+        m_playerController.HUD_restoreLife += RestoreLife;
+        m_playerController.HUD_removeLife += RemoveLife;
 
         m_spawnManager.HUD_updateWave += UpdateWaveText;
         m_spawnManager.HUD_updateScore += UpdateScoreText;
