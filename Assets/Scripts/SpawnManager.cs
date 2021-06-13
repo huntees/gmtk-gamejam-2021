@@ -5,6 +5,8 @@ using System;
 
 public class SpawnManager : MonoBehaviour
 {
+    private AudioSource m_audioSource;
+
     private int m_playerScore = 0;
 
     [Header("Enemy Prefabs")]
@@ -66,6 +68,8 @@ public class SpawnManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        m_audioSource = GetComponent<AudioSource>();
+
         pair1 = new Pair(m_spawnLocations[0], m_spawnLocations[1]);
         pair2 = new Pair(m_spawnLocations[0], m_spawnLocations[2]);
         pair3 = new Pair(m_spawnLocations[2], m_spawnLocations[3]);
@@ -163,6 +167,7 @@ public class SpawnManager : MonoBehaviour
     public void DecreaseEnemyCount()
     {
         m_enemiesLeft--;
+        m_audioSource.PlayOneShot(m_audioSource.clip);
     }
 
     bool isObjectHere(Vector3 position)

@@ -3,6 +3,8 @@ using System;
 
 public class PlayerController : MonoBehaviour
 {
+    private AudioSource m_audioSource;
+
     [SerializeField] private int m_health = 3;
     private int m_currentHealth = 3;
 
@@ -25,6 +27,8 @@ public class PlayerController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        m_audioSource = GetComponent<AudioSource>();
+
         Application.targetFrameRate = 145;
         m_currentHealth = m_health;
 
@@ -73,6 +77,7 @@ public class PlayerController : MonoBehaviour
     void Die()
     {
         m_isDead = true;
+        m_audioSource.Play();
         m_pauseMenu.TriggerGameOver();
     }
 
@@ -85,7 +90,7 @@ public class PlayerController : MonoBehaviour
         if (collider.CompareTag("Enemy"))
         {
             TakeDamage(1);
-            Destroy(collider);
+            collider.GetComponent<Enemy>().Die();
         }
         //else if (collider.CompareTag("Part"))
         //{

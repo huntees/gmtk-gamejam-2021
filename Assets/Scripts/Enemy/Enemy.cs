@@ -7,12 +7,6 @@ public class Enemy : MonoBehaviour
     private SpawnManager m_spawnManager;
     protected int damagePoints = 15;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-
-    }
-
     private void FixedUpdate()
     {
         transform.position = new Vector3(transform.position.x, 2.3f, transform.position.z);
@@ -35,10 +29,11 @@ public class Enemy : MonoBehaviour
 
         m_spawnManager.DecreaseEnemyCount();
 
-        //should move to children after testing
-        m_spawnManager.AddScore(10);
-
         Destroy(gameObject);
+    }
 
+    protected void AddScore(int score)
+    {
+        m_spawnManager.AddScore(score);
     }
 }

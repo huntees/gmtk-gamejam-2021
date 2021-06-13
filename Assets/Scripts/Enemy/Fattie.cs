@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Fattie : Enemy
 {
+    [SerializeField] private int m_scoreValue = 20;
+
 
     [SerializeField] private GameObject m_barrel;
 
@@ -67,6 +69,13 @@ public class Fattie : Enemy
     public override int GetDamagePoints()
     {
         return damagePoints;
+    }
+
+    public override void Die()
+    {
+        base.Die();
+
+        AddScore(m_scoreValue);
     }
 
 

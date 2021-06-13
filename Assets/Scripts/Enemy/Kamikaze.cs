@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Kamikaze : Enemy
 {
+    [SerializeField] private int m_scoreValue = 10;
 
     private Vector3 b_move;
     private float b_movementSpeed = 4f;
@@ -41,5 +42,11 @@ public class Kamikaze : Enemy
         return damagePoints;
     }
 
+    public override void Die()
+    {
+        base.Die();
+
+        AddScore(m_scoreValue);
+    }
 
 }

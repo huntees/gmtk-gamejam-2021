@@ -3,6 +3,8 @@
 public class Staro : Enemy
 {
 
+    [SerializeField] private int m_scoreValue = 30;
+
     [SerializeField] private GameObject[] m_barrels;
 
     private FattieProjectile m_projectile;
@@ -72,6 +74,13 @@ public class Staro : Enemy
     public override int GetDamagePoints()
     {
         return damagePoints;
+    }
+
+    public override void Die()
+    {
+        base.Die();
+
+        AddScore(m_scoreValue);
     }
 
 
