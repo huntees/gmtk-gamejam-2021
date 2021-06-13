@@ -1,15 +1,18 @@
 ﻿using UnityEngine;
+using System;
 
 public class PlayerController : MonoBehaviour
 {
-    [SerializeField] private int m_health = 100;
-    private int m_currentHealth = 100;
+    [SerializeField] private int m_health = 3;
+    private int m_currentHealth = 3;
 
     [SerializeField] private int m_ammoCount = 50;
 
     [SerializeField] private float m_movementSpeed = 10.0f;
     [SerializeField] private float m_currentMovementSpeed = 10.0f;
     [SerializeField] private float m_turnRate = 100.0f;
+
+    public event Action<int> HUD_updateAmmo;
 
     private Vector3 m_move;
 
@@ -18,6 +21,8 @@ public class PlayerController : MonoBehaviour
     {
         Application.targetFrameRate = 145;
         m_currentHealth = m_health;
+
+        HUD_updateAmmo(m_ammoCount);
     }
 
     void FixedUpdate()
@@ -31,9 +36,9 @@ public class PlayerController : MonoBehaviour
 
     public void TakeDamage(int numDamage)
     {
-        m_currentHealth -= numDamage;
-        m_health -= numDamage;
-        if (m_health <= 0) { Die(); }
+        m_currentHealth--;
+
+        if (m_currentHealth <= 0) { Die(); }
     }
 
     void Die()
@@ -74,6 +79,7 @@ public class PlayerController : MonoBehaviour
     public void AddAmmo(int newAmmo)
     {
         m_ammoCount += newAmmo;
+        HUD_updateAmmo?.Invoke(m_ammoCount);
     }
     public int GetAmmo()
     {
@@ -83,13 +89,14 @@ public class PlayerController : MonoBehaviour
     public void ReduceAmmo(int cost)
     {
         m_ammoCount -= cost;
+        HUD_updateAmmo?.Invoke(m_ammoCount);
     }
 
     public void UpdateMovementSpeed()
     {
         // Speed variations: dependent of number of children. Should never reach 0, but can get ridiculously low. (to adapt based on types of children, but maybe not this section of the code)
         //m_movementSpeed = 1.0f + (11.0f / Mathf.Sqrt(transform.hierarchyCount));
-        var childCount = transform.hierarchyCount - 2;
+        var childCount = transform.hierarchyCount - 6;
         m_currentMovementSpeed = m_movementSpeed - ((childCount / (childCount + 30.0f)) * 10.0f);
     }
 }
