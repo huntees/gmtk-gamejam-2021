@@ -16,12 +16,9 @@ public class PartMedic : Part
 
         if (m_collidedObject.CompareTag("Player"))
         {
-            // todo
-            // m_playerController.AddMedic(medicStock);
+            m_playerController.RestoreHealth();
             medicStock = 0;
         }
-
-
     }
 
     // Update is called once per frame
