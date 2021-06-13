@@ -2,6 +2,8 @@
 
 public class PartShooter : Part
 {
+    private AudioSource m_audioSource;
+
     private GameObject m_projectileGameObject;
     private ObjectPool m_ammoObjectPool;
     private Projectile m_projectile;
@@ -15,12 +17,9 @@ public class PartShooter : Part
         m_ammoObjectPool = GameObject.Find("AmmoObjectPool").GetComponent<ObjectPool>();
 
         target = GameObject.Find("Player");
-    }
 
-    // protected override string GetKind()
-    // {
-    //     return "shooter";
-    // }
+        m_audioSource = GetComponent<AudioSource>();
+    }
 
     // Update is called once per frame
     protected override void Update()
@@ -59,6 +58,7 @@ public class PartShooter : Part
 
             m_projectile = m_projectileGameObject.GetComponent<Projectile>();
             m_projectile.SetDirection(GetFireDirection());
+            m_audioSource.PlayOneShot(m_audioSource.clip);
 
             m_projectileGameObject.SetActive(true);
         }
