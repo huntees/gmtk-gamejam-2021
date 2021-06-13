@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 2948627703116077443}
   - component: {fileID: 2948627703116077442}
   - component: {fileID: 2948627703116077441}
-  - component: {fileID: 2948627703116077446}
   m_Layer: 0
   m_Name: FattieProjectile
   m_TagString: Enemy
@@ -42,7 +41,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2948627703116077440}
-  m_Mesh: {fileID: -462981019419857548, guid: 48ccac78a760d1f4eb0491fe6f64e1cd, type: 3}
+  m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!23 &2948627703116077443
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -61,7 +60,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 3cd5147016e0b004d87d6585c8356050, type: 2}
+  - {fileID: 2100000, guid: f3f804326eaca9048957f35ea245cdcc, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -109,19 +108,3 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   f_movementSpeed: 5
   f_health: 50
---- !u!54 &2948627703116077446
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2948627703116077440}
-  serializedVersion: 2
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_UseGravity: 0
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 4
-  m_CollisionDetection: 0
