@@ -40,6 +40,7 @@ public class SpawnManager : MonoBehaviour
     private int waveCount = 0;
 
     private int m_enemiesPerSpawn = 1;
+    private int m_partsPerSpawn = 1;
 
 
     public class Pair
@@ -76,11 +77,17 @@ public class SpawnManager : MonoBehaviour
                 m_enemiesPerSpawn++;
             }
 
-            InitiateEnemySpawn(2 * waveCount, m_enemiesPerSpawn);
+            InitiateEnemySpawn(5 * waveCount, m_enemiesPerSpawn);
         }
+
         if (!m_isSpawningParts)
         {
-            InitiatePartSpawn(5, 1 * waveCount);
+            if (waveCount % 2 == 0)
+            {
+                m_partsPerSpawn++;
+            }
+
+            InitiatePartSpawn(waveCount * 2, m_partsPerSpawn);
         }
     }
 
@@ -202,8 +209,13 @@ public class SpawnManager : MonoBehaviour
             }
         }
 
-        m_isSpawningParts = false;
+        StartCoroutine(Delay(m_randomSpawnTime));
     }
 
+    IEnumerator Delay(float seconds)
+    {
+        yield return new WaitForSeconds(seconds);
+        m_isSpawningParts = false;
+    }
 
 }

@@ -32,7 +32,7 @@ public class Fattie : Enemy
     void FixedUpdate()
     {
 
-        heading = target.transform.position - transform.position;
+        heading = transform.forward;
         float sqrLen = heading.sqrMagnitude;
 
         if (sqrLen > midDistance * midDistance)
