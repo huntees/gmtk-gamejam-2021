@@ -20,6 +20,8 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField] private PauseMenu m_pauseMenu;
 
+    public bool m_isDead = false;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -31,6 +33,11 @@ public class PlayerController : MonoBehaviour
 
     void FixedUpdate()
     {
+        if(m_isDead)
+        {
+            return ;
+        }
+
         transform.Rotate(Input.GetAxisRaw("Rotate") * Vector3.up * m_turnRate * Time.deltaTime);
 
         //Movement 
@@ -65,6 +72,7 @@ public class PlayerController : MonoBehaviour
 
     void Die()
     {
+        m_isDead = true;
         m_pauseMenu.TriggerGameOver();
     }
 

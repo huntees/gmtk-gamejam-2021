@@ -44,6 +44,11 @@ public class PartShooter : Part
 
     private void Shoot()
     {
+        if(m_playerController.m_isDead)
+        {
+            return ;
+        }
+
         if (m_playerController.GetAmmo() > 0)
         {
             // Reduce the number of ammo
