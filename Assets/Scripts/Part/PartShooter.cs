@@ -16,7 +16,7 @@ public class PartShooter : Part
     {
         m_ammoObjectPool = GameObject.Find("AmmoObjectPool").GetComponent<ObjectPool>();
 
-        target = GameObject.Find("Player");
+        target = GameObject.Find("Player").transform;
 
         m_audioSource = GetComponent<AudioSource>();
     }

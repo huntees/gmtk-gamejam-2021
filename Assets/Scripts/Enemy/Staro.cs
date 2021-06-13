@@ -16,20 +16,15 @@ public class Staro : Enemy
 
     private float rotationSpeed = 1.0f;
 
-    public GameObject target;
-    Vector3 heading;
+    public Transform target;
     public float midDistance = 25.0f;
     private Vector3 b_move;
-    private float b_movementSpeed = 2.5f;
-
-
+    private float b_movementSpeed = 5.0f;
 
     void Start()
     {
-        target = GameObject.Find("Player");
+        target = GameObject.Find("Player").transform;
     }
-
-
 
     // Update is called once per frame
     void Update()
@@ -48,16 +43,10 @@ public class Staro : Enemy
     void FixedUpdate()
     {
 
-        heading = target.transform.position - transform.position;
-        float sqrLen = heading.sqrMagnitude;
-
-        if (sqrLen > midDistance * midDistance)
+        if ((target.position - transform.position).magnitude >= 25.0f)
         {
-            //Movement if further than midDistance
-            b_move = (heading).normalized;
-            transform.position += b_move * b_movementSpeed * Time.deltaTime;
+            transform.position += (target.position - transform.position).normalized * b_movementSpeed * Time.deltaTime;
         }
-
 
         transform.Rotate(Vector3.up, 5.0f);
     }

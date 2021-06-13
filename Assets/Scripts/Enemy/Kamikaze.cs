@@ -7,11 +7,9 @@ public class Kamikaze : Enemy
     [SerializeField] private int m_scoreValue = 10;
 
     private Vector3 b_move;
-    private float b_movementSpeed = 4f;
+    private float b_movementSpeed = 7.0f;
     protected static new int damagePoints = 30;
     private Rigidbody b_rigidbody;
-
-    public GameObject target;
 
     Vector3 heading;
 
@@ -20,20 +18,9 @@ public class Kamikaze : Enemy
         b_rigidbody = GetComponent<Rigidbody>();
     }
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        target = GameObject.Find("Player");
-    }
-
     void FixedUpdate()
     {
-
-        heading = target.transform.position - transform.position;
-        //Movement 
-        b_move = (heading).normalized;
-        transform.position += b_move * b_movementSpeed * Time.deltaTime;
-
+        transform.position += transform.forward * b_movementSpeed * Time.deltaTime;
     }
 
 

@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class Fattie : Enemy
 {
@@ -15,11 +13,9 @@ public class Fattie : Enemy
     [SerializeField] private float f_attackTime = 1.0f;
     private float f_nextAttackTime = 5.0f;
     protected static new int damagePoints = 20;
-    public GameObject target;
-    Vector3 heading;
+    public Transform target;
     public float midDistance = 25.0f;
-    private Vector3 b_move;
-    private float b_movementSpeed = 2.5f;
+    private float b_movementSpeed = 5.0f;
 
 
 
@@ -28,20 +24,14 @@ public class Fattie : Enemy
 
     void Start()
     {
-        target = GameObject.Find("Player");
+        target = GameObject.Find("Player").transform;
     }
 
     void FixedUpdate()
     {
-
-        heading = transform.forward;
-        float sqrLen = heading.sqrMagnitude;
-
-        if (sqrLen > midDistance * midDistance)
+        if((target.position - transform.position).magnitude >= 30.0f)
         {
-            //Movement if further than midDistance
-            b_move = (heading).normalized;
-            transform.position += b_move * b_movementSpeed * Time.deltaTime;
+            transform.position += transform.forward * b_movementSpeed * Time.deltaTime;
         }
     }
 
