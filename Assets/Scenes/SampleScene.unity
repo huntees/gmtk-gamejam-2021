@@ -2878,6 +2878,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+<<<<<<< HEAD
   m_Navigation:
     m_Mode: 3
     m_SelectOnUp: {fileID: 0}
@@ -2911,6 +2912,28 @@ MonoBehaviour:
       m_Calls: []
 --- !u!114 &1625818734
 MonoBehaviour:
+=======
+  m_enemyPrefabs:
+  - {fileID: 4320775955312189061, guid: 088984d8495992c4a8c385f524de9c17, type: 3}
+  - {fileID: 5165036295707513672, guid: 94ffd26e5b23f9248a1c30ddea57c27b, type: 3}
+  - {fileID: 2235811725194416872, guid: 97440b8a6e2581c438c51fcae5b1fe71, type: 3}
+  m_partPrefabs:
+  - {fileID: 5321644272611008540, guid: 1fbc15e4c60d0644189c1cf0bf6458a5, type: 3}
+  - {fileID: 3897850492112084573, guid: 1aac206268e2ec046a56c05a57472410, type: 3}
+  - {fileID: 6964395833121731271, guid: e15d2dddd9916094a80dbce89692bcf6, type: 3}
+  - {fileID: 699763726788501726, guid: 8ab702a1dce28c545962114d389ae500, type: 3}
+  m_spawnLocations:
+  - {fileID: 1765525316}
+  - {fileID: 1098570763}
+  - {fileID: 362854077}
+  - {fileID: 1579705886}
+  m_maxSpawnEnemyTime: 8
+  m_minSpawnEnemyTime: 4
+  m_maxSpawnPartTime: 8
+  m_minSpawnPartTime: 4
+--- !u!4 &1503981735
+Transform:
+>>>>>>> 97204bee755a1227d44fc9fbb4124c8349949bfb
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
