@@ -72,12 +72,14 @@ public class Part : MonoBehaviour
 
     public void EjectOnHit()
     {
-        Eject();
-
-        foreach (Transform child in transform)
+        Part[] childArray = GetComponentsInChildren<Part>();
+        
+        for(int i = childArray.Length - 1; i > 0; i--)
         {
-            child.transform.GetComponent<Part>().EjectOnHit();
+            childArray[i].Eject();
         }
+
+        Eject();
     }
 
     protected virtual void OnCollisionEnter(Collision collision)
@@ -103,12 +105,8 @@ public class Part : MonoBehaviour
         {
             if (m_collidedObject.CompareTag("Enemy"))
             {
-                foreach (Transform child in transform)
-                {
-                    child.transform.GetComponent<Part>().EjectOnHit();
-                }
 
-                Eject();
+                EjectOnHit();
                 Destroy(gameObject);
                 m_collidedObject.gameObject.GetComponent<Enemy>().Die();
 
