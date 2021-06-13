@@ -3,7 +3,7 @@
 public class Part : MonoBehaviour
 {
     protected PlayerController m_playerController;
-    private Rigidbody m_rigidbody;
+    protected Rigidbody m_rigidbody;
     protected GameObject m_collidedObject;
 
     protected bool m_isConnected = false;
@@ -44,7 +44,7 @@ public class Part : MonoBehaviour
         transform.rotation = Quaternion.Euler(-90.0f, transform.eulerAngles.y, transform.eulerAngles.z);
     }
 
-    private void Eject()
+    protected void Eject()
     {
         if(!m_isConnected)
         {
@@ -60,7 +60,7 @@ public class Part : MonoBehaviour
         transform.tag = "Part";
 
         //Re-enable the ability to be connected after a delay, otherwise part connects immediately after detaching
-        Invoke("EnableConnect", 0.2f);
+        Invoke("EnableConnect", 0.3f);
 
         m_playerController?.UpdateMovementSpeed();
     }
@@ -70,7 +70,7 @@ public class Part : MonoBehaviour
         m_isConnected = false;
     }
 
-    private void EjectOnHit()
+    public void EjectOnHit()
     {
         Eject();
 
@@ -108,6 +108,7 @@ public class Part : MonoBehaviour
                     child.transform.GetComponent<Part>().EjectOnHit();
                 }
 
+                Eject();
                 Destroy(gameObject);
                 m_collidedObject.gameObject.GetComponent<Enemy>().Die();
 

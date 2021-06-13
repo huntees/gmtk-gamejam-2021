@@ -20,21 +20,10 @@ public class PlayerController : MonoBehaviour
         m_currentHealth = m_health;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        if (Input.GetKey(KeyCode.RightArrow))
-        {
-            transform.Rotate(Vector3.up * m_turnRate * Time.deltaTime);
-        }
-        else if (Input.GetKey(KeyCode.LeftArrow))
-        {
-            transform.Rotate(Vector3.up * -m_turnRate * Time.deltaTime);
-        }
-    }
-
     void FixedUpdate()
     {
+        transform.Rotate(Input.GetAxisRaw("Rotate") * Vector3.up * m_turnRate * Time.deltaTime);
+
         //Movement 
         m_move = (Input.GetAxisRaw("Vertical") * Vector3.forward + Input.GetAxisRaw("Horizontal") * Vector3.right).normalized;
         transform.position += m_move * m_currentMovementSpeed * Time.deltaTime;

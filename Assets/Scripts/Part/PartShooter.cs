@@ -63,13 +63,39 @@ public class PartShooter : Part
 
     protected override void OnCollisionEnter(Collision collision)
     {
+        m_collidedObject = collision.gameObject;
+
         if (!m_isConnected)
         {
-            base.OnCollisionEnter(collision);
-
             if (m_collidedObject.CompareTag("Player"))
             {
+                m_isConnected = true;
+                transform.parent = m_collidedObject.transform;
+                transform.tag = "Player";
+
+                m_rigidbody.velocity = Vector3.zero;
+                m_rigidbody.isKinematic = true;
+
+                m_playerController = transform.root.GetComponent<PlayerController>();
+                m_playerController?.UpdateMovementSpeed();
+
                 transform.rotation = Quaternion.LookRotation((transform.position - transform.parent.position).normalized);
+            }
+        }
+        else
+        {
+            if (m_collidedObject.CompareTag("Enemy"))
+            {
+                foreach (Transform child in transform)
+                {
+                    child.transform.GetComponent<Part>().EjectOnHit();
+                }
+
+                Eject();
+                Destroy(gameObject);
+                m_collidedObject.gameObject.GetComponent<Enemy>().Die();
+
+                m_playerController?.UpdateMovementSpeed();
             }
         }
     }

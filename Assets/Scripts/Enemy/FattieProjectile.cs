@@ -48,13 +48,15 @@ public class FattieProjectile : Enemy
         if (m_collidedObject.tag == "Player") {
 
             var playerController = m_collidedObject.GetComponent<PlayerController>();
+            var partController = m_collidedObject.GetComponent<Part>();
 
             if(playerController != null)
             {
                 playerController.TakeDamage(GetDamagePoints());
             } 
-            else if(m_collidedObject.GetComponent<Part>() != null)
+            else if(partController != null)
             {
+                partController.EjectOnHit();
                 Destroy(other.gameObject);
             }
 
