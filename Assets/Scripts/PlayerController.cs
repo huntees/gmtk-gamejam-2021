@@ -8,8 +8,8 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField] private int m_ammoCount = 50;
 
-    [SerializeField] private float m_movementSpeed = 10.0f;
-    [SerializeField] private float m_currentMovementSpeed = 10.0f;
+    [SerializeField] private float m_movementSpeed = 14.0f;
+    [SerializeField] private float m_currentMovementSpeed = 14.0f;
     [SerializeField] private float m_turnRate = 100.0f;
 
     public event Action<int> HUD_updateAmmo;

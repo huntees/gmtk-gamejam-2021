@@ -6,7 +6,7 @@ public class Kamikaze : Enemy
 {
 
     private Vector3 b_move;
-    private float b_movementSpeed = 2.5f;
+    private float b_movementSpeed = 4f;
     protected static new int damagePoints = 30;
     private Rigidbody b_rigidbody;
 
