@@ -12,11 +12,13 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float m_currentMovementSpeed = 14.0f;
     [SerializeField] private float m_turnRate = 100.0f;
 
+    private Vector3 m_move;
+
     public event Action<int> HUD_updateAmmo;
     public event Action HUD_restoreLife;
     public event Action HUD_removeLife;
 
-    private Vector3 m_move;
+    [SerializeField] private PauseMenu m_pauseMenu;
 
     // Start is called before the first frame update
     void Start()
@@ -34,6 +36,14 @@ public class PlayerController : MonoBehaviour
         //Movement 
         m_move = (Input.GetAxisRaw("Vertical") * Vector3.forward + Input.GetAxisRaw("Horizontal") * Vector3.right).normalized;
         transform.position += m_move * m_currentMovementSpeed * Time.deltaTime;
+    }
+
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            m_pauseMenu.TogglePauseMenu();
+        }
     }
 
     public void TakeDamage(int numDamage)
@@ -55,7 +65,7 @@ public class PlayerController : MonoBehaviour
 
     void Die()
     {
-        Debug.Log("You died!");
+        m_pauseMenu.TriggerGameOver();
     }
 
 
@@ -66,12 +76,8 @@ public class PlayerController : MonoBehaviour
         // todo update: all enemies should inherit an Enemy class (including projectiles should have a GetDamagePoints function)
         if (collider.CompareTag("Enemy"))
         {
-            Debug.Log("contact with an ennemy");
-            int damageToSet = collider.GetComponent<Enemy>().GetDamagePoints();
-            Debug.Log("damageToSet: " + damageToSet);
-            TakeDamage(damageToSet);
+            TakeDamage(1);
             Destroy(collider);
-
         }
         //else if (collider.CompareTag("Part"))
         //{
