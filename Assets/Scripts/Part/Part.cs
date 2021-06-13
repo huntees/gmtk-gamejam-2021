@@ -8,6 +8,14 @@ public class Part : MonoBehaviour
 
     protected bool m_isConnected = false;
 
+
+    public GameObject target;
+    Vector3 heading;
+    public float midDistance = 30.0f;
+    private Vector3 b_move;
+    private float b_movementSpeed = 2.5f;
+
+
     void Awake()
     {
         m_rigidbody = GetComponent<Rigidbody>();
@@ -16,7 +24,7 @@ public class Part : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
+        target = GameObject.Find("Player");
     }
 
     // Update is called once per frame
@@ -37,6 +45,17 @@ public class Part : MonoBehaviour
     {
         transform.position = new Vector3(transform.position.x, 2.3f, transform.position.z);
         transform.rotation = Quaternion.Euler(-90.0f, transform.eulerAngles.y, transform.eulerAngles.z);
+
+        heading = target.transform.position - transform.position;
+        float sqrLen = heading.sqrMagnitude;
+
+        if (sqrLen > midDistance * midDistance)
+        {
+            //Movement if further than midDistance
+            b_move = (heading).normalized;
+            transform.position += b_move * b_movementSpeed * Time.deltaTime;
+        }
+
     }
 
     protected void Eject()

@@ -5,7 +5,10 @@ public class PartAmmo : Part
     private int stockAmmo = 100;
 
     // Start is called before the first frame update
-    void Start() { }
+    void Start()
+    {
+        target = GameObject.Find("Player");
+    }
 
     protected override void OnCollisionEnter(Collision collision)
     {

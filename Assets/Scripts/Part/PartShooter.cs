@@ -13,6 +13,8 @@ public class PartShooter : Part
     void Start()
     {
         m_ammoObjectPool = GameObject.Find("AmmoObjectPool").GetComponent<ObjectPool>();
+
+        target = GameObject.Find("Player");
     }
 
     // protected override string GetKind()
