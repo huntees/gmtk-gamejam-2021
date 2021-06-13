@@ -14,8 +14,34 @@ public class Fattie : Enemy
     private float f_nextAttackTime = 5.0f;
     protected static new int damagePoints = 20;
     public GameObject target;
+    Vector3 heading;
+    public float midDistance = 25.0f;
+    private Vector3 b_move;
+    private float b_movementSpeed = 2.5f;
+
+
 
     private float rotationSpeed = 1.0f;
+
+
+    void Start()
+    {
+        target = GameObject.Find("Player");
+    }
+
+    void FixedUpdate()
+    {
+
+        heading = target.transform.position - transform.position;
+        float sqrLen = heading.sqrMagnitude;
+
+        if (sqrLen > midDistance * midDistance)
+        {
+            //Movement if further than midDistance
+            b_move = (heading).normalized;
+            transform.position += b_move * b_movementSpeed * Time.deltaTime;
+        }
+    }
 
 
     // Update is called once per frame
