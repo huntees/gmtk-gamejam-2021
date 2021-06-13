@@ -39,6 +39,8 @@ public class SpawnManager : MonoBehaviour
 
     private int waveCount = 0;
 
+    private int m_enemiesPerSpawn = 1;
+
 
     public class Pair
     {
@@ -69,11 +71,16 @@ public class SpawnManager : MonoBehaviour
         if (!m_isSpawningEnemies && m_enemiesLeft <= 0)
         {
             waveCount++;
-            InitiateEnemySpawn(2 * waveCount, 1 * waveCount);
+            if(waveCount % 3 == 0)
+            {
+                m_enemiesPerSpawn++;
+            }
+
+            InitiateEnemySpawn(2 * waveCount, m_enemiesPerSpawn);
         }
         if (!m_isSpawningParts)
         {
-            InitiatePartSpawn(2 * waveCount, 1 * waveCount);
+            InitiatePartSpawn(5, 1 * waveCount);
         }
     }
 
