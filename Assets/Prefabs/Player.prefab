@@ -125,9 +125,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_health: 100
-  numberAmmo: 50
-  m_movementSpeed: 10
-  m_currentMovementSpeed: 10
+  m_ammoCount: 50
+  m_movementSpeed: 14
+  m_currentMovementSpeed: 14
   m_turnRate: 100
 --- !u!1001 &1607839923777936796
 PrefabInstance:
