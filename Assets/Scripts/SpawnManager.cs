@@ -9,6 +9,12 @@ public class SpawnManager : MonoBehaviour
     private int m_randomEnemyIndex = 0;
     private GameObject m_instantiatedEnemy;
 
+    [Header("Parts Prefabs")]
+    [SerializeField] GameObject[] m_partPrefabs;
+    private int m_randomPartIndex = 0;
+    private GameObject m_instantiatedPart;
+
+
     [Header("Enemy Spawn Locations")]
     [SerializeField] private Transform[] m_spawnLocations;
 
@@ -17,9 +23,15 @@ public class SpawnManager : MonoBehaviour
     private int m_randomLocationIndex;
 
     [Header("Enemy Spawn Properties")]
-    [SerializeField] private float m_maxSpawnTime = 8f;
-    [SerializeField] private float m_minSpawnTime = 4f;
+    [SerializeField] private float m_maxSpawnEnemyTime = 8f;
+    [SerializeField] private float m_minSpawnEnemyTime = 4f;
+
+    [Header("Part Spawn Properties")]
+    [SerializeField] private float m_maxSpawnPartTime = 8f;
+    [SerializeField] private float m_minSpawnPartTime = 4f;
+
     private float m_randomSpawnTime = 4f;
+
 
     private int m_enemiesLeft = 0;
     private bool m_isSpawning = false;
@@ -65,6 +77,12 @@ public class SpawnManager : MonoBehaviour
         StartCoroutine(SpawnEnemies(numOfEnemies, enemiesPerSpawn));
     }
 
+
+    public void InitiatePartSpawn(int numOfParts, int partsPerSpawn)
+    {
+        StartCoroutine(SpawnParts(numOfParts, partsPerSpawn));
+    }
+
     IEnumerator SpawnEnemies(int numOfEnemies, int enemiesPerSpawn)
     {
         m_isSpawning = true;
@@ -72,7 +90,7 @@ public class SpawnManager : MonoBehaviour
 
         while (enemiesSpawned < numOfEnemies)
         {
-            m_randomSpawnTime = Random.Range(m_minSpawnTime, m_maxSpawnTime);
+            m_randomSpawnTime = Random.Range(m_minSpawnEnemyTime, m_maxSpawnEnemyTime);
 
             yield return new WaitForSeconds(m_randomSpawnTime);
 
@@ -137,5 +155,59 @@ public class SpawnManager : MonoBehaviour
             return true;
         }
     }
+
+    IEnumerator SpawnParts(int numOfParts, int partsPerSpawn)
+    {
+        m_isSpawning = true;
+        int partsSpawned = 0;
+
+        while (partsSpawned < numOfParts)
+        {
+            m_randomSpawnTime = Random.Range(m_minSpawnPartTime, m_maxSpawnPartTime);
+
+            yield return new WaitForSeconds(m_randomSpawnTime);
+
+            for (int i = 0; i < partsPerSpawn; i++)
+            {
+                //Randomise spawn location and enemy type
+                m_randomLocationIndex = Random.Range(0, m_spawnLocations.Length);
+                m_randomPartIndex = Random.Range(0, m_partPrefabs.Length);
+
+                //Get any enemy and set their location
+                m_instantiatedPart = Instantiate(m_partPrefabs[m_randomPartIndex], transform.position, transform.rotation);
+                // m_instantiatedEnemy.transform.position = m_spawnLocations[m_randomLocationIndex].position;
+
+                // Dirty, but this is a game jam
+                int randSpawnEdgeIndx = Random.Range(0, 4);
+                var selecPair = (randSpawnEdgeIndx == 0) ? pair1 : (randSpawnEdgeIndx == 1) ? pair2 : (randSpawnEdgeIndx == 2) ? pair3 : pair4;
+                var baseVecPair = (selecPair.transform2.position - selecPair.transform1.position).normalized;
+                int randomizerEdgeVal = Random.Range(0, 100);
+                var posPart = selecPair.transform1.position + baseVecPair * randomizerEdgeVal;
+
+                // float dirRandX = Random.Range(0.0f, 100.0f); float dirRandZ = Random.Range(0.0f, 100.0f);
+                // if (dirRandX < 50.0f) { dirRandX = -1.0f; } else { dirRandX = 1.0f; }
+                // if (dirRandZ < 50.0f) { dirRandZ = -1.0f; } else { dirRandZ = 1.0f; }
+                // Debug.Log("dirRandX: " + dirRandX + ", dirRandZ: " + dirRandZ);
+                // float posX = 28.0f * dirRandX + Random.Range(0, 5) * dirRandX;
+                // float posZ = 25.0f * dirRandZ + Random.Range(0, 5) * dirRandZ;
+                // Vector3 posEnemy = new Vector3(posX, 2.3f, posZ);
+                // if (isObjectHere(posEnemy)) {  } else { }
+
+                m_instantiatedPart.transform.position = posPart;
+                m_instantiatedPart.SetActive(true);
+
+                partsSpawned++;
+
+                //break if enemies spawned exceeds limit
+                if (partsSpawned >= numOfParts)
+                {
+                    break;
+                }
+            }
+        }
+
+        m_isSpawning = false;
+    }
+
 
 }

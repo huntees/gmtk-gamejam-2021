@@ -19,11 +19,6 @@ public class Part : MonoBehaviour
 
     }
 
-    // protected virtual string GetKind()
-    // {
-    //     return "base";
-    // }
-
     // Update is called once per frame
     protected virtual void Update()
     {
@@ -46,9 +41,9 @@ public class Part : MonoBehaviour
 
     protected void Eject()
     {
-        if(!m_isConnected)
+        if (!m_isConnected)
         {
-            return ;
+            return;
         }
 
         //turn physics on again and fire part away from player
@@ -73,8 +68,8 @@ public class Part : MonoBehaviour
     public void EjectOnHit()
     {
         Part[] childArray = GetComponentsInChildren<Part>();
-        
-        for(int i = childArray.Length - 1; i > 0; i--)
+
+        for (int i = childArray.Length - 1; i > 0; i--)
         {
             childArray[i].Eject();
         }
