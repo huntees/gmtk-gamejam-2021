@@ -267,6 +267,8 @@ MonoBehaviour:
   - {fileID: 1424926639851648272}
   - {fileID: 1424926640727442371}
   - {fileID: 1424926640736858981}
-  m_projectileGameObject: {fileID: 2948627703116077440, guid: 1c666365491fba446ae786f42edf18a9,
+  m_projectileGameObject: {fileID: 2713414524200479273, guid: ca5696b9a974d254c84b37d40b0898f4,
     type: 3}
   m_attackTime: 5
+  target: {fileID: 0}
+  midDistance: 25
