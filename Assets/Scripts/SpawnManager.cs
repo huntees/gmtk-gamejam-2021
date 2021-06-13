@@ -1,9 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class SpawnManager : MonoBehaviour
 {
+    private int m_playerScore = 0;
+
     [Header("Enemy Prefabs")]
     [SerializeField] GameObject[] m_enemyPrefabs;
     private int m_randomEnemyIndex = 0;
@@ -57,6 +60,9 @@ public class SpawnManager : MonoBehaviour
 
     private Pair pair1, pair2, pair3, pair4;
 
+    public event Action<int> HUD_updateWave;
+    public event Action<int> HUD_updateScore;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -64,6 +70,8 @@ public class SpawnManager : MonoBehaviour
         pair2 = new Pair(m_spawnLocations[0], m_spawnLocations[2]);
         pair3 = new Pair(m_spawnLocations[2], m_spawnLocations[3]);
         pair4 = new Pair(m_spawnLocations[1], m_spawnLocations[3]);
+
+        HUD_updateScore?.Invoke(m_playerScore);
     }
 
     // Update is called once per frame
@@ -72,6 +80,8 @@ public class SpawnManager : MonoBehaviour
         if (!m_isSpawningEnemies && m_enemiesLeft <= 0)
         {
             waveCount++;
+            HUD_updateWave?.Invoke(waveCount);
+
             if(waveCount % 3 == 0)
             {
                 m_enemiesPerSpawn++;
@@ -109,15 +119,15 @@ public class SpawnManager : MonoBehaviour
 
         while (enemiesSpawned < numOfEnemies)
         {
-            m_randomSpawnTime = Random.Range(m_minSpawnEnemyTime, m_maxSpawnEnemyTime);
+            m_randomSpawnTime = UnityEngine.Random.Range(m_minSpawnEnemyTime, m_maxSpawnEnemyTime);
 
             yield return new WaitForSeconds(m_randomSpawnTime);
 
             for (int i = 0; i < enemiesPerSpawn; i++)
             {
                 //Randomise spawn location and enemy type
-                m_randomLocationIndex = Random.Range(0, m_spawnLocations.Length);
-                m_randomEnemyIndex = Random.Range(0, m_enemyPrefabs.Length);
+                m_randomLocationIndex = UnityEngine.Random.Range(0, m_spawnLocations.Length);
+                m_randomEnemyIndex = UnityEngine.Random.Range(0, m_enemyPrefabs.Length);
 
                 //Get any enemy and set their location
                 m_instantiatedEnemy = Instantiate(m_enemyPrefabs[m_randomEnemyIndex], transform.position, transform.rotation);
@@ -126,10 +136,10 @@ public class SpawnManager : MonoBehaviour
                 // Dirty, but this is a game jam
                 // This doesn't work and I'm not sure I get why. Anyway, we need some verification of the position not overlapping with an existing object, otherwise we get in a softlock
                 // float randomizerEdgeVal = Random.Range(0.0f, baseVecPair.magnitude);
-                int randSpawnEdgeIndx = Random.Range(0, 4);
+                int randSpawnEdgeIndx = UnityEngine.Random.Range(0, 4);
                 var selecPair = (randSpawnEdgeIndx == 0) ? pair1 : (randSpawnEdgeIndx == 1) ? pair2 : (randSpawnEdgeIndx == 2) ? pair3 : pair4;
                 var baseVecPair = (selecPair.transform2.position - selecPair.transform1.position).normalized;
-                int randomizerEdgeVal = Random.Range(0, 100);
+                int randomizerEdgeVal = UnityEngine.Random.Range(0, 100);
                 var posEnemy = selecPair.transform1.position + baseVecPair * randomizerEdgeVal;
 
                 m_instantiatedEnemy.transform.position = posEnemy;
@@ -175,25 +185,25 @@ public class SpawnManager : MonoBehaviour
 
         while (partsSpawned < numOfParts)
         {
-            m_randomSpawnTime = Random.Range(m_minSpawnPartTime, m_maxSpawnPartTime);
+            m_randomSpawnTime = UnityEngine.Random.Range(m_minSpawnPartTime, m_maxSpawnPartTime);
 
             yield return new WaitForSeconds(m_randomSpawnTime);
 
             for (int i = 0; i < partsPerSpawn; i++)
             {
                 //Randomise spawn location and enemy type
-                m_randomLocationIndex = Random.Range(0, m_spawnLocations.Length);
-                m_randomPartIndex = Random.Range(0, m_partPrefabs.Length);
+                m_randomLocationIndex = UnityEngine.Random.Range(0, m_spawnLocations.Length);
+                m_randomPartIndex = UnityEngine.Random.Range(0, m_partPrefabs.Length);
 
                 //Get any enemy and set their location
                 m_instantiatedPart = Instantiate(m_partPrefabs[m_randomPartIndex], transform.position, transform.rotation);
                 // m_instantiatedEnemy.transform.position = m_spawnLocations[m_randomLocationIndex].position;
 
                 // Dirty, but this is a game jam
-                int randSpawnEdgeIndx = Random.Range(0, 4);
+                int randSpawnEdgeIndx = UnityEngine.Random.Range(0, 4);
                 var selecPair = (randSpawnEdgeIndx == 0) ? pair1 : (randSpawnEdgeIndx == 1) ? pair2 : (randSpawnEdgeIndx == 2) ? pair3 : pair4;
                 var baseVecPair = (selecPair.transform2.position - selecPair.transform1.position).normalized;
-                int randomizerEdgeVal = Random.Range(0, 100);
+                int randomizerEdgeVal = UnityEngine.Random.Range(0, 100);
                 var posPart = selecPair.transform1.position + baseVecPair * randomizerEdgeVal;
 
                 m_instantiatedPart.transform.position = posPart;
@@ -216,6 +226,12 @@ public class SpawnManager : MonoBehaviour
     {
         yield return new WaitForSeconds(seconds);
         m_isSpawningParts = false;
+    }
+
+    public void AddScore(int score)
+    {
+        m_playerScore += score;
+        HUD_updateScore?.Invoke(m_playerScore);
     }
 
 }

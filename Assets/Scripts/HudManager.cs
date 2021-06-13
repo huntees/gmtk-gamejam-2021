@@ -13,11 +13,15 @@ public class HudManager : MonoBehaviour
     [SerializeField] private GameObject[] m_lifeIcons;
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         m_playerController = GameObject.Find("Player").GetComponent<PlayerController>();
+        m_spawnManager = GameObject.Find("SpawnManager").GetComponent<SpawnManager>();
 
         m_playerController.HUD_updateAmmo += UpdateAmmoText;
+
+        m_spawnManager.HUD_updateWave += UpdateWaveText;
+        m_spawnManager.HUD_updateScore += UpdateScoreText;
     }
 
     void UpdateWaveText(int wave)

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-
+    private SpawnManager m_spawnManager;
     protected int damagePoints = 15;
 
     // Start is called before the first frame update
@@ -31,7 +31,14 @@ public class Enemy : MonoBehaviour
 
     public virtual void Die()
     {
-        GameObject.Find("SpawnManager")?.GetComponent<SpawnManager>().DecreaseEnemyCount();
+        m_spawnManager = GameObject.Find("SpawnManager").GetComponent<SpawnManager>();
+
+        m_spawnManager.DecreaseEnemyCount();
+
+        //should move to children after testing
+        m_spawnManager.AddScore(10);
+
         Destroy(gameObject);
+
     }
 }

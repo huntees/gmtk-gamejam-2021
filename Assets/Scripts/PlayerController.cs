@@ -22,7 +22,7 @@ public class PlayerController : MonoBehaviour
         Application.targetFrameRate = 145;
         m_currentHealth = m_health;
 
-        HUD_updateAmmo(m_ammoCount);
+        HUD_updateAmmo?.Invoke(m_ammoCount);
     }
 
     void FixedUpdate()
